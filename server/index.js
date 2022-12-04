@@ -1,6 +1,13 @@
 const express = require('express')
-const app = express()
+const dotenv = require('dotenv')
+const dbConnect = require('./src/config/db')
 
-app.listen(5432,()=>{
-    console.log("pehchann server running on port 5432")
+const app = express()
+dotenv.config()
+
+
+
+app.listen(process.env.PORT || 5432, async () => {
+    await dbConnect()
+    console.log("pehchann server running on port ", process.env.PORT || 5432)
 })
